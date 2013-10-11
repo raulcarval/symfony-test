@@ -222,35 +222,4 @@ class PostController extends Controller
             ->getForm()
         ;
     }
-    
-    
-    public function searchAction()
-    {
-    	
-    	$em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AcmeSearchBundle:Post')->findAll();
-    	
-    	$form = $this->get('form.factory')->create(new PostFilterType());
-    
-    	if ($this->get('request')->query->has('search')) {
-    		// bind values from the request
-    		$form->bind($this->get('request'));
-    
-    		// initialize a query builder
-    		$filterBuilder = $this->get('doctrine.orm.entity_manager')
-    		->getRepository('AcmeSearchBundle:Post')
-    		->createQueryBuilder('p');
-    
-    		// build the query from the given form object
-    		$this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-    
-    		// now look at the DQL =)
-    		var_dump($filterBuilder->getDql());
-    	}
-    
-    	return $this->render('AcmeSearchBundle:Post:search.html.twig', array(
-    			'form' => $form->createView(), 'post' => $entities
-    	));
-}
 }
