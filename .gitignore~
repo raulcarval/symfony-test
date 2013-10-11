@@ -1,6 +1,5 @@
 .buildpath
 .settings/.*
-
 /web/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
@@ -12,4 +11,3 @@
 /vendor/
 /bin/
 /composer.phar
-composer.lock
