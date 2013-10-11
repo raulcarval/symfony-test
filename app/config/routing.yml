@@ -1,0 +1,8 @@
+acme_search:
+    resource: "@AcmeSearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
+acme_base:
+    resource: "@AcmeBaseBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<form method="get" action="{{ path('post_search') }}">
+    {{ form_rest(form) }}
+    <input type="submit" name="search" value="filter" />
+</form> 
+
+{% for p in post %}   
+ <ul>
+  <li> {{ p.title }} </li>
+  
+  {% endfor %}
+</ul>
+{% endblock %}

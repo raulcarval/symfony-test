@@ -1,0 +1,14 @@
+Acme\SearchBundle\Entity\Post:
+  type: entity
+  table: post
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string  
+    content:
+        type: text
+      
