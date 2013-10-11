@@ -222,4 +222,27 @@ class PostController extends Controller
             ->getForm()
         ;
     }
+    
+    public function searchAction(Request $request)
+    {
+        // retrieve the service
+        $filterManager = $this->get('my_filter_manager');
+        // create the filter form according to the filters given to the filter manager
+        $filterForm    = $filterManager->createForm();
+    
+        // is data filtered ?
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->bind($request);
+        }
+    
+        $filteredNews = $filterManager->filter();
+    
+        // let's give all parameters to the view
+        return $this->render('AcmeSearchBundle:Post:search.html.twig', array(
+                'news'                   => $filteredNews,
+                'filter_form'            => $filterForm->createView(),
+                'form_action_route_name' => $request->get('_route'),
+                'is_filtered'            => $filterManager->hasQueryingFilters()
+        ));
+    }
 }
