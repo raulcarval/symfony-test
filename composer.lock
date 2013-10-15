@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d7d7aa65cabc54704f1231e34792651f",
+    "hash": "eaefe5b4d43390eb663a1d1d88884450",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -603,59 +603,6 @@
                 "orm"
             ],
             "time": "2013-05-11 07:51:12"
-        },
-        {
-            "name": "idci/filter-form-bundle",
-            "version": "dev-master",
-            "target-dir": "IDCI/Bundle/FilterFormBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/IDCI-Consulting/FilterFormBundle.git",
-                "reference": "22cad78154d6e1c12d9094850abb29232274d6c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/IDCI-Consulting/FilterFormBundle/zipball/22cad78154d6e1c12d9094850abb29232274d6c8",
-                "reference": "22cad78154d6e1c12d9094850abb29232274d6c8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": ">=2.1",
-                "twig/twig": "*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "IDCI\\Bundle\\FilterFormBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Gabriel BONDAZ",
-                    "email": "gabriel.bondaz@idci-consulting.fr",
-                    "homepage": "http://www.idci-consulting.fr",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Pierre FERROLLIET",
-                    "email": "pierre.ferrolliet@idci-consulting.fr",
-                    "homepage": "http://www.idci-consulting.fr"
-                }
-            ],
-            "description": "Symfony FilterFormBundle",
-            "keywords": [
-                "doctrine",
-                "entity",
-                "filter",
-                "form",
-                "search"
-            ],
-            "time": "2013-07-24 13:47:08"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1554,9 +1501,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "idci/filter-form-bundle": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.3"
     },

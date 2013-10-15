@@ -18,8 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Acme\BaseBundle\AcmeBaseBundle(),
             new Acme\SearchBundle\AcmeSearchBundle(),
-            new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle(),
-        );
+
+            );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();

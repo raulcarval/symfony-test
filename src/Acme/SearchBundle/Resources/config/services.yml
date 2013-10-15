@@ -1,11 +1,5 @@
 parameters:
 #    acme_search.example.class: Acme\SearchBundle\Example
-
-services:
-    my_filter_manager:
-        class:     "Acme\SearchBundle\Filter\FilterManager"
-        arguments:  [@service_container]
-
 #    acme_search.example:
 #        class: %acme_search.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
