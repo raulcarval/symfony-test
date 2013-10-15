@@ -1,0 +1,10 @@
+<!-- testFilter.html.twig -->
+<form method="get" action="{{ path('post_search') }}">
+    {{ form_rest(form) }}
+    <input type="submit" name="submit-filter" value="filter" />
+</form>
+
+
+ {% for post in posts %}
+ <li>{{ post.title }}</li>
+ {% endfor %}

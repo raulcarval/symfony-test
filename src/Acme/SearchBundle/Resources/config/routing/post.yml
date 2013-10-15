@@ -28,3 +28,7 @@ post_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "AcmeSearchBundle:Post:delete" }
     requirements: { _method: post|delete }
+    
+post_search:
+    pattern: /search
+    defaults: { _controller: "AcmeSearchBundle:Post:search" }

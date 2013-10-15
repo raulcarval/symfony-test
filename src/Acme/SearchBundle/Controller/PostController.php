@@ -2,9 +2,10 @@
 
 namespace Acme\SearchBundle\Controller;
 
+use Acme\SearchBundle\Filter\PostFilter;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Acme\SearchBundle\Entity\Post;
 use Acme\SearchBundle\Form\PostType;
 
@@ -219,5 +220,29 @@ class PostController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    public function searchAction()
+    {
+        $form = $this->get('form.factory')->create(new PostFilter());
+        $posts = null;
+        
+        if ($this->get('request')->query->has('submit-filter')) {
+            
+            $form->bind($this->get('request'));
+            
+            $filterBuilder = $this->get('doctrine.orm.entity_manager')
+                ->getRepository('AcmeSearchBundle:Post')
+                ->createQueryBuilder('e');
+            
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
+    
+            
+            $posts = $filterBuilder->getQuery()->getResult();
+        }
+    
+        return $this->render('AcmeSearchBundle:Post:search.html.twig', array(
+                'form' => $form->createView(), 'posts' => $posts
+        ));
     }
 }
