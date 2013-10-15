@@ -233,7 +233,7 @@ class PostController extends Controller
             
             $filterBuilder = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AcmeSearchBundle:Post')
-                ->createQueryBuilder('e');
+                ->createQueryBuilder('p');
             
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
     

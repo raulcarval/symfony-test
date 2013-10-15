@@ -4,7 +4,15 @@
     <input type="submit" name="submit-filter" value="filter" />
 </form>
 
-
- {% for post in posts %}
- <li>{{ post.title }}</li>
- {% endfor %}
+<table>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post.title }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td>Not found</td>
+    </tr>
+    {% endfor %}
+ </table>
+ 

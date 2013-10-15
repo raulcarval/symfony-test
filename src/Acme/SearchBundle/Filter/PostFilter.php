@@ -1,19 +1,33 @@
 <?php
-// MySuperFilterType.php
+
 namespace Acme\SearchBundle\Filter;
 
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query\Expr;
+
+
 
 class PostFilter extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', 'filter_text');
-        
+        $builder->add(
+                'title', 
+                'filter_text',
+                array('apply_filter' => function( QueryBuilder $queryBuilder, Expr $expr, $field, array $values)
+                {
+                    if (!empty($values['value']))
+                    {
+                        $queryBuilder->andWhere('p.title LIKE :title')
+                            ->setParameter('title', '%'.$values['value'].'%');
+                    }
+                    
+                },
+          ));
     }
 
     public function getName()
@@ -25,7 +39,7 @@ class PostFilter extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
-            'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
+            'validation_groups' => array('filtering') 
         ));
     }
 }
