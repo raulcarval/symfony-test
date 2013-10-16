@@ -222,7 +222,7 @@ class PostController extends Controller
         ;
     }
     
-    public function searchAction()
+    public function searchAction($max = 3)
     {
         $form = $this->get('form.factory')->create(new PostFilter());
         $posts = null;
@@ -233,7 +233,8 @@ class PostController extends Controller
             
             $filterBuilder = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AcmeSearchBundle:Post')
-                ->createQueryBuilder('p');
+                ->createQueryBuilder('p')
+                ->setMaxResults($max);
             
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
     
