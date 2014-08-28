@@ -1,3 +1,13 @@
+acme_infographic:
+    resource: "@AcmeInfographicBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+acme_anexo:
+    resource: "@AcmeAnexoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 acme_search:
     resource: "@AcmeSearchBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,4 +15,3 @@ acme_search:
 acme_base:
     resource: "@AcmeBaseBundle/Resources/config/routing.yml"
     prefix:   /
-

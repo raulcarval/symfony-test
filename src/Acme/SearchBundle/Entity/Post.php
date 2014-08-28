@@ -80,4 +80,33 @@ class Post
     {
         return $this->content;
     }
+    /**
+     * @var \Acme\SearchBundle\Entity\Comment
+     */
+    private $comment;
+
+
+    /**
+     * Set comment
+     *
+     * @param \Acme\SearchBundle\Entity\Comment $comment
+     * @return Post
+     */
+    public function setComment(\Acme\SearchBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+    
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Acme\SearchBundle\Entity\Comment 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+    
 }

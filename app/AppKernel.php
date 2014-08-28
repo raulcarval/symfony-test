@@ -1,10 +1,10 @@
 <?php
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+
     public function registerBundles()
     {
         $bundles = array(
@@ -19,21 +19,25 @@ class AppKernel extends Kernel
             new Acme\BaseBundle\AcmeBaseBundle(),
             new Acme\SearchBundle\AcmeSearchBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
-
-            );
-
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            new Acme\AnexoBundle\AcmeAnexoBundle(),
+            new Acme\InfographicBundle\AcmeInfographicBundle(),
+        );
+        
+        if (in_array($this->getEnvironment(), array(
+            'dev',
+            'test'
+        ))) {
             $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
-
+        
         return $bundles;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

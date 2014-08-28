@@ -1,8 +1,8 @@
 <!-- testFilter.html.twig -->
-<form method="get" action="{{ path('post_search') }}">
-    {{ form_rest(form) }}
-    <input type="submit" name="submit-filter" value="filter" />
-</form>
+{# <form method="get" action="{{ path('post_search') }}">#}
+{#     {{ form_rest(form) }}#}
+{#     <input type="submit" name="submit-filter" value="filter" />#}
+{# </form>#}
 
 <table>
     {% for post in posts %}
@@ -16,3 +16,5 @@
     {% endfor %}
  </table>
  
+ 
+  {{ render(controller('AcmeSearchBundle:Post:pagination', { 'page': (page is defined)? page : '1' })) }}

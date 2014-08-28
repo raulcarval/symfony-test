@@ -2,8 +2,9 @@
 
 namespace Acme\SearchBundle\Controller;
 
+use Symfony\Component\Validator\Constraints\Count;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Acme\SearchBundle\Filter\PostFilter;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\SearchBundle\Entity\Post;
@@ -222,28 +223,80 @@ class PostController extends Controller
         ;
     }
     
-    public function searchAction($max = 3)
+    public function searchAction($page = 1, $max = 5)
     {
-        $form = $this->get('form.factory')->create(new PostFilter());
-        $posts = null;
+        $em = $this->getDoctrine()->getManager();
+        $offset = ($page -1) * $max;
+        $entity = $em->getRepository('AcmeSearchBundle:Post')
+            ->createQueryBuilder('p')
+            ->setFirstResult($offset)
+            ->setMaxResults($max);
         
-        if ($this->get('request')->query->has('submit-filter')) {
+        //$form = $this->get('form.factory')->create(new PostFilter());
+        
+        
+//         if ($this->get('request')->query->has('submit-filter')) {
             
-            $form->bind($this->get('request'));
+//             $form->bind($this->get('request'));
             
-            $filterBuilder = $this->get('doctrine.orm.entity_manager')
-                ->getRepository('AcmeSearchBundle:Post')
-                ->createQueryBuilder('p')
-                ->setMaxResults($max);
+//             $filterBuilder = $this->get('doctrine.orm.entity_manager')
+//                 ->getRepository('AcmeSearchBundle:Post')
+//                 ->createQueryBuilder('p');
+//                 //->setFirstResult(0)
+//                 //->setMaxResults($max);
             
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
+//             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
     
             
-            $posts = $filterBuilder->getQuery()->getResult();
-        }
-    
+//             $posts = $filterBuilder->getQuery()->getResult();
+            
+        
+//         }
+
+        $posts = $entity->getQuery()->getResult();
+        
         return $this->render('AcmeSearchBundle:Post:search.html.twig', array(
-                'form' => $form->createView(), 'posts' => $posts
+                //'form' => $form->createView(), 
+                'posts' => $posts,
+               
         ));
+    }
+    
+    public function paginationAction($page = 1, $max = 5)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $entity = $em->getRepository('AcmeSearchBundle:Post')
+            ->createQueryBuilder('p');
+           // ->setMaxResults($max);
+        
+        
+        
+        $posts = $entity->getQuery()->getResult();
+        
+        $qtdPaginas = (ceil(count($posts)/$max) > 0)? ceil(count($posts)/$max) : 1;
+        
+        $ultima = $qtdPaginas;
+        $active = $page;
+        if ($qtdPaginas > 5) {
+            $inicial = (($active - 2) <= 0)? 1 : ($active - 2);
+            $final = (($active + 2) >= $ultima)? $ultima : ($active + 2);
+            ($active < 4)? $final = 5 : null;
+            ($active > ($ultima-3))? $inicial = $ultima-4 : null;
+        } else {
+            $inicial = 1;
+            $final = $qtdPaginas;
+        }
+        
+        return $this->render('AcmeSearchBundle:Post:pagination.html.twig', array(
+                //'form' => $form->createView(),
+                'posts' => $posts,
+                'ultima' => $ultima,
+                'active' => $active,
+                'inicial' => $inicial,
+                'final' => $final
+        ));
+        
     }
 }

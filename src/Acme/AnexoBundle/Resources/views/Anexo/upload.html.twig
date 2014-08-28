@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<form action="{{ path('anexo_file') }}" {{ form_enctype(upload_form) }} method="post" novalidate>
+{# <input id="fileupload" type="file" multiple="multiple">#}
+{{ form_widget(upload_form.file,{ 'full_name': upload_form.file.vars.full_name ~ '[]' }) }}
+{{ form_rest(upload_form) }}
+<input type="submit">
+</form>
+{% endblock body %}
+
+{% block js %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript"  src="{{ asset('bundles/acmeanexo/js/vendor/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript"  src="{{ asset('bundles/acmeanexo/js/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript"  src="{{ asset('bundles/acmeanexo/js/jquery.fileupload.js') }}"></script>
+
+<script type="text/javascript">
+
+$(function () {
+	$(document).ready(function(){
+	    $('#form_file').fileupload(
+	    {
+	        dataType: 'json',
+	        url:'{{path('anexo_file') }}',
+	        done: function (e, data) {
+	            $.each(data.result.files, function (index, file) {
+	                $('<p/>').text(file.name).appendTo(document.body);
+	            });
+	        }
+	    });
+	  });
+</script>
+ 
+{% endblock js %}
