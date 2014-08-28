@@ -12,14 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
 class InfographicController extends Controller
 {
 	/**
-	* @Route("/info")
+	* @Route("/infographic", name="infographic")
 	* @Template()
 	*/
 
-	public function infoAction()
+	public function infographicAction()
 	{
 
-	    return $this->render('AcmeInfographicBundle:Info:info.html.twig', 
+	    return $this->render('AcmeInfographicBundle:Infographic:info.html.twig', 
 	        array(
 	            'title' => 'Title of Infographic',
 	            'slug' => 'slug-of-infographic',
@@ -30,12 +30,18 @@ class InfographicController extends Controller
 	}
 	
 	/**
-	 * @Route("/send")
+	 * @Route("/send", name="send_infographic")
+	 * 
+	 * @return Response
 	 */
 	public function sendAction()
 	{
-	    $html = file_get_contents('http://symfony-test.localhost/info');
-	    return new Response($html);
-	    
+	    $slug = array('slug' => 'slug-of-infographic');
+
+	    $html = file_get_contents('http://symfony-test.localhost/infographic');
+	    return new Response($html, 200, array(
+	       'Content-Type' => 'application/force-download',
+           'Content-Disposition' => 'attachment; filename="' .$slug['slug'].'.html')
+	    );
 	}
 }
