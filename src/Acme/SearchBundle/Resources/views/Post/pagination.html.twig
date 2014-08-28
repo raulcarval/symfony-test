@@ -1,0 +1,15 @@
+<div class="pagination">
+    <ul>
+        <li {{ (inicial == 1)? 'class="disabled"' : null }}>
+            <a href="{{ path('post_search', {  'page': 1 }) }}">«</a>
+        </li>
+        {% for i in range(inicial, final) %}
+            <li {{ (i == active)? 'class="active"' : null }}>
+                <a href="{{ path('post_search', { 'page': i }) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        <li {{ (active == ultima)? 'class="disabled"' : null }}>
+            <a href="{{ path('post_search', {  'page': ultima }) }}">»</a>
+        </li>
+    </ul>
+</div>

@@ -13,3 +13,5 @@
 /bin/
 /composer.phar
 composer.lock
+.settings
+.idea

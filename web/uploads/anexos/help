@@ -1,0 +1,81 @@
+//Config Code Snnifer
+	phpcs --config-set default_standard PSR2
+	phpcs --config-set default_standard Symfony2
+
+
+
+ {% for tag in entity.tags %}
+            $('#postagens_tags').addTag('{{ tag.nome }}');
+            {% if(loop.index == 1) %}
+                $('span.tag').attr('onclick', 'deletePostagemTag({{ entity.id }}, {{ tag.id }})');
+            {% endif %} 
+          {% endfor %}
+
+          $('span.tag').each(function(){
+              console.log($(this).find('span').text());
+          });
+
+
+
+
+
+{% for tag in entity.tags %} 
+    $('#postagens_tags').addAdd('{{ tag.nome }}');
+    $('span.tag').attr('onclick', 'deletePostagemTag({{ entity.id }},{{ tag.id }})');   
+{% endfor %}
+
+        /*$('span.tag').each(function() {
+        console.log($(this).find('span').text());
+    });*/
+
+
+o site do curso é o ucertify.com
+login
+corsini@gmail.com
+senha a2@345box
+lá tem o curso do PHP !!
+pode usar !!
+
+havij
+
+
+clonar na doors
+git clone www-data@192.168.0.201:/Dados/A2Projetos/2013.02.desenvolvesp/www 2013.02.desenvolvesp
+
+
+a2comunicacao dados de acesso
+
+	FTP
+
+		ftp.aquarius.a2comunicacao.com.br
+		login: a2comunicacao
+		Senha: Kif7#3Xu 
+
+
+
+	banco 
+		database_host="a2mysql.a2fotografia.com.br"
+    		database_name="aquarius_a2comunicacao"
+    		database_user="a2mysqluser"
+    		database_password="a23b45x"
+
+	cms
+		aquarius.a2comunicacao.com.br | a2comunicacao / a23b45x
+
+	admin 
+		A2 Comunicacao
+		a2siteboxaquarius
+
+ ssh a2comunicacao@aquarius.a2comunicacao.com.br
+ Kif7#3Xu
+
+
+merge devsp
+ git checkout -b feature-adicionar-descricao-simulador
+git commit -a -m "adicionando descrição do simulador"
+git checkout develop
+ git merge feature-adicionar-descricao-simulador --no-ff
+
+dreamhost habilitar -> passenger   ambiente framework/symfony
+
+
